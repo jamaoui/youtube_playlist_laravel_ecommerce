@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="container my-5">
+    @include('shared.nav')
     @if($errors->any())
         <div class="alert alert-danger" role="alert">
             <strong>Errors</strong>

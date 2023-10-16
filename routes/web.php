@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,33 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\StoreController::class, 'index']);
 
-Route::resource('products', ProductController::class);
 
-Route::resource('categories', CategoryController::class);
+
+
+// ADMIN , EDITOR, USER
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+//ADMIN
+Route::middleware(['admin'])->group(function () {
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::get('/admin/dashboard', function () {
+        return 'Hi Administrator';
+    })->name('admin_dashboard');
+});
+
+Route::middleware(['editor'])->group(function () {
+    Route::get('/editor/dashboard', function () {
+        return 'Hi Editor';
+    })->name('editor_dashboard');
+});
+
+/*
+ * / :
+ *
+ * */
+
+require __DIR__ . '/auth.php';
