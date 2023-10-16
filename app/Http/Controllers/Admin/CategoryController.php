@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index(): View
     {
         $categories = Category::query()->paginate(10);
-        return view('category.index', compact(
+        return view('users.admin.category.index', compact(
             'categories'
         ));
     }
@@ -28,7 +28,7 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $isUpdate = false;
-        return view('category.form', compact(
+        return view('users.admin.category.form', compact(
             'category', 'isUpdate'
         ));
     }
@@ -51,7 +51,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $products = $category->products()->get();
-        return view('category.show', compact(
+        return view('users.admin.category.show', compact(
             'category', 'products'
         ));
     }
@@ -62,7 +62,7 @@ class CategoryController extends Controller
     public function edit(Category $category): View
     {
         $isUpdate = true;
-        return view('category.form', compact(
+        return view('users.admin.category.form', compact(
             'category', 'isUpdate'
         ));
     }

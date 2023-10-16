@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::query()->with('category')->paginate(10);
-        return view('product.index', compact(
+        return view('users.admin.product.index', compact(
             'products'
         ));
     }
@@ -32,7 +32,7 @@ class ProductController extends Controller
             'price' => 0,
         ]);
         $isUpdate = false;
-        return view('product.form', compact(
+        return view('users.admin.product.form', compact(
             'product', 'isUpdate', 'categories'
         ));
     }
@@ -67,7 +67,7 @@ class ProductController extends Controller
     {
         $isUpdate = true;
         $categories = Category::all();
-        return view('product.form', compact(
+        return view('users.admin.product.form', compact(
             'product', 'isUpdate', 'categories'
         ));
     }

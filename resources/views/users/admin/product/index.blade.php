@@ -1,6 +1,4 @@
-@extends('base')
-@section('title', 'Products')
-
+@extends('users.admin.app')
 @section('content')
     <div class="d-flex justify-content-between align-items-center">
         <h1>Product list </h1>

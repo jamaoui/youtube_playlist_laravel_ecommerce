@@ -1,4 +1,5 @@
-@extends('base')
+@extends('users.admin.app')
+
 @section('title', 'Categories')
 
 @section('content')

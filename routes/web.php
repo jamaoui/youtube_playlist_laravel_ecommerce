@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\StoreController::class, 'index']);
 
-Route::resource('products', ProductController::class);
+Route::middleware(['editor'])->group(function () {
+    Route::get('/editor/dashboard', [\App\Http\Controllers\Editor\EditorController::class, 'index'])->name('editor_dashboard');
+});
 
-Route::resource('categories', CategoryController::class);
+Route::middleware(['admin'])->group(function () {
+    Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin_dashboard');
+});
+
+Auth::routes();
+

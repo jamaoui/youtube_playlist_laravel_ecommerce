@@ -34,7 +34,7 @@ class StoreController extends Controller
             'price' => 0,
         ]);
         $isUpdate = false;
-        return view('product.form', compact(
+        return view('users.admin.product.form', compact(
             'product', 'isUpdate'
         ));
     }
@@ -68,7 +68,7 @@ class StoreController extends Controller
     public function edit(Product $product)
     {
         $isUpdate = true;
-        return view('product.form', compact(
+        return view('users.admin.product.form', compact(
             'product', 'isUpdate'
         ));
     }
