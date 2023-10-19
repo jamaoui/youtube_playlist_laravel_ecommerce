@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\StoreController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\StoreController::class, 'index'])->name('home_page');
 
 Route::middleware(['editor'])->group(function () {
     Route::get('/editor/dashboard', [\App\Http\Controllers\Editor\EditorController::class, 'index'])->name('editor_dashboard');
